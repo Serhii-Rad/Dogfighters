@@ -1,0 +1,94 @@
+Player
+{
+	int HP;
+	void Move();
+	new Weapon();
+	event BonusPick;
+	event PlayerDeath;
+	event GetDamage;
+	void OnGetDamage(int);
+}
+
+Enemy
+{
+	int HP;
+	void Move();
+	new Weapon();
+	event EnemyDeath();
+}	
+
+Weapon
+{
+	float FireRate;
+	int Damage;
+	void Atack(AtackType atackType);
+	int AmmoLeft;
+}
+
+EnemyToken
+{
+	event PickToken;
+}
+	
+enum AtackType
+{
+	Default,
+	DoubleRate,
+	DoubleDamage,
+	TripleShoot
+}
+
+enum Bonuses
+{
+	DoubleRate,
+	DoubleDamage,
+	TripleShoot,
+	Immortality,
+	AdditionalAmmo
+}
+
+GameController
+{
+	int EnemyTokensAmount;
+	int EnemiesLeftAmount;
+
+	void OnPlayerDeath()
+	{
+		// destroy player's plane object
+		// show lose level window
+	}
+	
+	void OnEnemyDeath()
+	{
+		// destroy enemy object
+		// add 1 to destroyed enemies counter
+		// drop EnemyToken
+	}
+	
+	void OnPickToken()
+	{
+		// destroy token object
+		// add 1 to token counter
+	}
+	
+	void OnBonusPick(Bonuses bonus)
+	{
+		// destroy bonus object
+		// activate bonus feature
+		// show notification about bonus
+		// start 10 sec conter until disabling
+	}
+	
+	void OnLevelStart()
+	{
+		// spawn player
+		// spawn enemies
+		// reset enemies
+	}
+	
+	void OnLevelEnd()
+	{
+		// show related window
+		// destroy all level's objects
+	}
+}
