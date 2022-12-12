@@ -1,13 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class NormilizedMoving : MonoBehaviour
+public class MovingWithReducingSpeed : MonoBehaviour
 {
     [SerializeField]
     private Transform _startPoint;
-    [SerializeField] 
+    [SerializeField]
     private Transform _endPoint;
     [SerializeField]
     private Transform _target;
@@ -15,7 +15,6 @@ public class NormilizedMoving : MonoBehaviour
     private float _duration;
 
     private float _timeCounter = 0f;
-    private float _normilizedTime = 0f;
 
     void Start()
     {
@@ -24,24 +23,22 @@ public class NormilizedMoving : MonoBehaviour
 
     void Update()
     {
-        MoveWithEqualSpeed();
+        MoveWithReducingSpeed();
     }
 
-    
-    private void MoveWithEqualSpeed()
+    private void MoveWithReducingSpeed()
     {
         if (_timeCounter >= _duration)
             return;
-        _normilizedTime = _timeCounter / _duration;
-        _target.position = Vector2.Lerp(_startPoint.position, _endPoint.position, _normilizedTime);
+        _target.position = Vector2.Lerp(_target.position, _endPoint.position, Time.deltaTime);
         _timeCounter += Time.deltaTime;
     }
+
 
     [ContextMenu("Move Again")]
     private void OneMoreTime()
     {
         _timeCounter = 0;
-        _normilizedTime = 0;
         _target.position = _startPoint.position;
     }
 }

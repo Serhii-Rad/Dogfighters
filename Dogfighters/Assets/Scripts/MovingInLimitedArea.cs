@@ -1,18 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class NormilizedMoving : MonoBehaviour
+public class MovingInLimitedArea : MonoBehaviour
 {
     [SerializeField]
     private Transform _startPoint;
-    [SerializeField] 
+    [SerializeField]
     private Transform _endPoint;
     [SerializeField]
     private Transform _target;
     [SerializeField]
     private float _duration;
+    [SerializeField]
+    private float _xMaxPosition;
 
     private float _timeCounter = 0f;
     private float _normilizedTime = 0f;
@@ -24,16 +26,17 @@ public class NormilizedMoving : MonoBehaviour
 
     void Update()
     {
-        MoveWithEqualSpeed();
+        MoveInLimitedArea();
     }
 
-    
-    private void MoveWithEqualSpeed()
+    private void MoveInLimitedArea()
     {
         if (_timeCounter >= _duration)
             return;
         _normilizedTime = _timeCounter / _duration;
-        _target.position = Vector2.Lerp(_startPoint.position, _endPoint.position, _normilizedTime);
+        var newPosition = Vector2.Lerp(_target.position, _endPoint.position, _normilizedTime);
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, _xMaxPosition);
+        _target.position = newPosition;
         _timeCounter += Time.deltaTime;
     }
 
@@ -45,3 +48,4 @@ public class NormilizedMoving : MonoBehaviour
         _target.position = _startPoint.position;
     }
 }
+
