@@ -1,18 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class NormilizedMoving : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private Transform _startPoint;
+    [SerializeField] 
+    private Transform _endPoint;
+    [SerializeField]
+    private Transform _target;
+    [SerializeField]
+    private float _duration;
+    [SerializeField]
+    private float _xMaxPosition;
+
+    private float _timeCounter = 0f;
+    private float _normilizedTime = 0f;
+
     void Start()
     {
-        
+        _target.position = _startPoint.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    
+    private void MoveWithEqualSpeed()
+    {
+        if (_timeCounter >= _duration)
+            return;
+        _normilizedTime = _timeCounter / _duration;
+        _target.position = Vector2.Lerp(_startPoint.position, _endPoint.position, _normilizedTime);
+        _timeCounter += Time.deltaTime;
+    }
+
+    private void MoveWithReducingSpeed() // second lesson
+    {
+        if (_timeCounter >= _duration)
+            return;
+        _normilizedTime = _timeCounter / _duration;
+        _target.position = Vector2.Lerp(_target.position, _endPoint.position, Time.deltaTime); 
+        _timeCounter += Time.deltaTime;
+    }
+
+    private void MoveInLimitedArea()
+    {
+        if (_timeCounter >= _duration)
+            return;
+        _normilizedTime = _timeCounter / _duration;
+        var newPosition = Vector2.Lerp(_target.position, _endPoint.position, _duration);
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, _xMaxPosition);
+        _target.position = newPosition;
+        _timeCounter += Time.deltaTime;
+    }
+
+    [ContextMenu("Move Again")]
+    private void OneMoreTime()
+    {
+        _timeCounter = 0;
+        _normilizedTime = 0;
+        _target.position = _startPoint.position;
     }
 }
