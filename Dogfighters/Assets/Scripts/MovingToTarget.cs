@@ -40,5 +40,6 @@ public class MovingToTarget : MonoBehaviour
         var directionVector = _target.transform.position - transform.position;
         directionVector.Normalize();
         transform.position += directionVector * _speed * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(directionVector, transform.forward), _rotationSpeed);
     }
 }
