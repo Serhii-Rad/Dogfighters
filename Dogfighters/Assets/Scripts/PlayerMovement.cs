@@ -45,4 +45,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidBody.AddForce(direction * _speed, ForceMode2D.Force);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"You crashed in enemy plane {collision.gameObject.name}");
+        Destroy(collision.gameObject);
+    }
 }
