@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementWithForce : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
@@ -14,13 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private bool _moveLeft = false;
     private bool _moveRight = false;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         _moveUp = Input.GetKey(KeyCode.W);
@@ -31,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (_moveUp)
             Move(Vector2.up);
         else if (_moveDown)
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move(Vector2 direction)
     {
         _rigidBody.AddForce(direction * _speed, ForceMode2D.Force);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,4 +52,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log($"You crashed in enemy plane {collision.gameObject.name}");
         Destroy(collision.gameObject);
     }
+
+    
 }
