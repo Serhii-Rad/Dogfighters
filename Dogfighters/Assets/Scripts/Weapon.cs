@@ -1,26 +1,48 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.Pool;
+using Transform = UnityEngine.Transform;
 
 namespace Assets.Scripts
 {
+    public class Weapon : MonoBehaviour
+    {
+        [SerializeField] private GameObject _bullet;
+        [SerializeField] private AtackType _atackType = AtackType.OneShoot;
+        [SerializeField] private float _fireDelay = 0.5f;
+
+        private float _timeSinceLastShot = 0.0f;
+
+        private void Start()
+        {
+        }
+
+        private void Update()
+        {
+            _timeSinceLastShot += Time.deltaTime;
+            if (Input.GetKey(KeyCode.Space) && _timeSinceLastShot >= _fireDelay)
+            {
+                _timeSinceLastShot = 0.0f;
+                Shoot(_atackType);
+            }
+        }
+
+        private void Shoot(AtackType atackType)
+        {
+            if (atackType == AtackType.OneShoot)
+                Instantiate(_bullet, transform.position, transform.rotation);
+            else if (atackType == AtackType.DoubleShoot)
+                Instantiate(_bullet, transform.position, transform.rotation); // to do
+            else if (atackType == AtackType.TripleShoot)
+                Instantiate(_bullet, transform.position, transform.rotation); // to do
+        }
+    }
+
     public enum AtackType
     {
         OneShoot, DoubleShoot, TripleShoot
-    }
-
-    public class Weapon
-    {
-        public Weapon() 
-        {
-
-        }
-
-        public void Shoot(AtackType atackType = AtackType.OneShoot)
-        {
-
-        }
     }
 }

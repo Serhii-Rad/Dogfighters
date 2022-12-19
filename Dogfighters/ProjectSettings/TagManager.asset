@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Background
   - Turret
+  - MusicMainTheme
+  - CameraBorder
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Background
   - Water
   - UI
-  - 
+  - Settings
   - 
   - 
   - 

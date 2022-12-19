@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Sprite _spriteAfterDeath;
 
     public float Speed => _speed * (float)_enemyType;
-    public Weapon Weapon { get; private set; }
 
     private IEnumerator PerformActionForSeconds(Action action, float seconds = 3f)
     {
@@ -35,15 +34,12 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        if (_enemyType != EnemyType.Missile)
-            Weapon = new Weapon();
-        MoveZigZag();
+
     }
 
     void Update()
     {
         Move();
-        Weapon?.Shoot();
     }
 
     
