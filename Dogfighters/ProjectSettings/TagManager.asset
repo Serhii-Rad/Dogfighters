@@ -9,6 +9,10 @@ TagManager:
   - Turret
   - MusicMainTheme
   - CameraBorder
+  - MusicSource
+  - HUD
+  - WinScreen
+  - LoseScreen
   layers:
   - Default
   - TransparentFX

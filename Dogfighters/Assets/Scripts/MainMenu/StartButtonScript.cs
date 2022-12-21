@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StartButtonScript : MonoBehaviour
 {
-    [SerializeField] private int _gameStartScene = 0;
+    private int _gameStartScene = 1;
 
     void Start()
     {

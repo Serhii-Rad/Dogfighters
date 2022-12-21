@@ -4,6 +4,7 @@ public class EnemyBulletScript : MonoBehaviour
 {
     [SerializeField] private float _velocity = 5f;
     [SerializeField] private float _lifeTime = 7f;
+
     void Start()
     {
         Destroy(gameObject, _lifeTime);
@@ -18,12 +19,9 @@ public class EnemyBulletScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         if (collision.CompareTag("CameraBorder"))
-        {
             Destroy(gameObject);
-        }
     }
 }

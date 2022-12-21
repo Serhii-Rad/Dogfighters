@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class PlayerMovementWithForce : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed;
-    [SerializeField]
-    private Rigidbody2D _rigidBody;
+    [SerializeField] private float _speed;
+    [SerializeField] private Rigidbody2D _rigidBody;
+    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private GameObject _loseScreen;
 
     private bool _moveUp = false;
     private bool _moveDown = false;
     private bool _moveLeft = false;
     private bool _moveRight = false;
 
+    private Health _health;
+
 
     void Start()
     {
+        _health = GetComponent<Health>();
     }
 
     void Update()
@@ -51,7 +54,18 @@ public class PlayerMovementWithForce : MonoBehaviour
     {
         Debug.Log($"You crashed in enemy plane {collision.gameObject.name}");
         Destroy(collision.gameObject);
+        if (collision.CompareTag("Enemy"))
+            Destroy(gameObject);
+        else
+        {
+            _health.DamagePlayer(10);
+        }
     }
 
-    
+    private void OnDestroy()
+    {
+        Time.timeScale = 0;
+        _loseScreen.SetActive(true);
+    }
+
 }
