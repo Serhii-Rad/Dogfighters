@@ -33,7 +33,10 @@ namespace Assets.Scripts
         private void Shoot(AtackType atackType)
         {
             if (atackType == AtackType.OneShoot)
+            {
+                AudioManager.Instance.PlaySFX(SFX_Type.Shoot);
                 Instantiate(_bullet, transform.position, transform.rotation);
+            }
             else if (atackType == AtackType.DoubleShoot)
                 Instantiate(_bullet, transform.position, transform.rotation); // to do
             else if (atackType == AtackType.TripleShoot)

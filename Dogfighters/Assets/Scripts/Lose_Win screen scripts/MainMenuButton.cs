@@ -12,5 +12,5 @@ public class MainMenuButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(OnMainMenuButtonClicl);
     }
 
-    private void OnMainMenuButtonClicl() => SceneManager.LoadScene(0);
+    private void OnMainMenuButtonClicl() => SceneManager.LoadScene(1);
 }

@@ -11,5 +11,5 @@ public class TryOneMoreTimeButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(OnTryOneMoreTimeClick);
     }
 
-    private void OnTryOneMoreTimeClick() => SceneManager.LoadScene(1);
+    private void OnTryOneMoreTimeClick() => SceneManager.LoadScene(0);
 }

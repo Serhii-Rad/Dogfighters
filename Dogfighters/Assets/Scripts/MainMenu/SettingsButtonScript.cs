@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SettingsButtonScript : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsPanel;
+
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(OpenSettingsPanel);

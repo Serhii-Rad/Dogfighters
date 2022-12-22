@@ -13,6 +13,7 @@ TagManager:
   - HUD
   - WinScreen
   - LoseScreen
+  - Slider Volume
   layers:
   - Default
   - TransparentFX
