@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 183294944934092117, guid: 9b36c5c61ad1a1a4083c6e2a433795d3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1439869053865898387, guid: 9b36c5c61ad1a1a4083c6e2a433795d3, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -79,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1439869053865898389, guid: 9b36c5c61ad1a1a4083c6e2a433795d3, type: 3}
+      propertyPath: m_TagString
+      value: EnemyBullet
+      objectReference: {fileID: 0}
     - target: {fileID: 7719016267545608183, guid: 9b36c5c61ad1a1a4083c6e2a433795d3, type: 3}
       propertyPath: _lifeTime
       value: 5
@@ -111,5 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b18f7361fc8e784a8372a163e1c46d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity: 10
+  _velocity: 7
   _lifeTime: 5

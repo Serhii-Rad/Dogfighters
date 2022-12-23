@@ -23,24 +23,47 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioSource _musicSource;
 
+    [SerializeField] private Slider _musicSlider;
+    [SerializeField] private Slider _sfxSlider;
+
     public static AudioManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            //Destroy(gameObject);
+        }
+        _sfxSource.volume = _sfxSlider.value;
+        _musicSource.volume = _musicSlider.value;
         PlayMusic(Music_Type.MainTheme);
     }
 
+    //public void Start()
+    //{
+    //    if (Instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        Instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //    PlayMusic(Music_Type.MainTheme);
+    //    _sfxSource.volume = _sfxSlider.value;
+    //    _musicSource.volume = _musicSlider.value;
+    //}
+
     void Update()
     {
+        _sfxSource.volume = _sfxSlider.value;
+        _musicSource.volume = _musicSlider.value;
     }
 
     public void PlaySFX(SFX_Type sfx_Type) { _sfxSource.PlayOneShot(_sfxDataList.Find(x => x.SFX_Type.Equals(sfx_Type)).AudioClip); }

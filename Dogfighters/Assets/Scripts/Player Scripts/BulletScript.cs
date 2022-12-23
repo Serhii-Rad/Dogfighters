@@ -23,7 +23,7 @@ public class BulletScript : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        if (collision.CompareTag("CameraBorder"))
+        else if (collision.CompareTag("CameraBorder"))
         {
             Destroy(gameObject);
         }

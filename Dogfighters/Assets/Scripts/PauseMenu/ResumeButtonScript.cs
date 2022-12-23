@@ -12,7 +12,7 @@ public class ResumeButtonScript : MonoBehaviour
 
     private void OnClickResume()
     {
-        Time.timeScale = 1;
+        GameControl.UnPauseGame();
         _pausePanel.SetActive(false);
     }
 }

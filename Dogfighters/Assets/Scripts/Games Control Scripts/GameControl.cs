@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -16,15 +17,31 @@ public class GameControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !_paused)
         {
-            Time.timeScale = 0;
+            PauseGame();
             _pausePanel.SetActive(!_paused);
             _paused = !_paused;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && _paused)
         {
-            Time.timeScale = 1;
+            UnPauseGame();
             _pausePanel.SetActive(!_paused);
             _paused = !_paused;
         }
     }
+    public static void StartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(Scenes.SampleScene.ToString());
+        AudioManager.Instance.PlayMusic(Music_Type.FightingTheme);
+    }
+
+    public static void PauseGame() => Time.timeScale = 0;
+
+    public static void UnPauseGame() => Time.timeScale = 1;
 }
+
+public enum Scenes
+{
+    MainMenuScene, SampleScene 
+}
+

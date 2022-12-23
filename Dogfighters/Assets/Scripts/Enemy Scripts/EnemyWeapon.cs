@@ -33,5 +33,11 @@ namespace Assets.Scripts
             else if (atackType == AtackType.TripleShoot)
                 Instantiate(_bullet, transform.position, transform.rotation); // to do
         }
+
+        private void OnEnable()
+        {
+            Shoot(_atackType);
+            Update();
+        }
     }
 }

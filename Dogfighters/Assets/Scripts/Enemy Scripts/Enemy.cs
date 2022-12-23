@@ -21,9 +21,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 3f;
     [SerializeField] private Sprite _spriteAfterDeath;
 
+    private GameObject _weapon;
+
     public float Speed => _speed * (float)_enemyType;
 
-    private IEnumerator PerformActionForSeconds(Action action, float seconds = 3f)
+    private IEnumerator PerformActionForSeconds(Action action, float seconds = 3f) // does not work
     {
         // Perform the action here
         action.Invoke();
@@ -34,7 +36,11 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            _weapon = transform.GetChild(i).gameObject;
+            _weapon.SetActive(false);
+        }
     }
 
     void Update()
@@ -51,10 +57,11 @@ public class Enemy : MonoBehaviour
                 MoveForward();
                 break;
             case EnemyType.Medium:
-                if (new System.Random().Next(1) == 0)
-                    MoveDiagonalLeft();
-                else
-                    MoveDiagonalRight();
+                //if (new System.Random().Next(1) == 0)
+                //    MoveDiagonalLeft();
+                //else
+                //    MoveDiagonalRight();
+                MoveDiagonalRight();
                 break;
             case EnemyType.Hard:
                 MoveZigZag();
@@ -100,5 +107,19 @@ public class Enemy : MonoBehaviour
     {
         //GetComponent<SpriteRenderer>().sprite = _spriteAfterDeath;
         Debug.Log("BOOM!");
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnBecameVisible()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            _weapon = transform.GetChild(i).gameObject;
+            _weapon.SetActive(true);
+        }
     }
 }

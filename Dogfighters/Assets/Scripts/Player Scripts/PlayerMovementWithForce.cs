@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovementWithForce : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _loseScreen;
@@ -14,6 +15,8 @@ public class PlayerMovementWithForce : MonoBehaviour
     private bool _moveDown = false;
     private bool _moveLeft = false;
     private bool _moveRight = false;
+    private bool _turnRight = false;
+    private bool _turnLeft = false;
 
     private Health _health;
 
@@ -26,9 +29,11 @@ public class PlayerMovementWithForce : MonoBehaviour
     void Update()
     {
         _moveUp = Input.GetKey(KeyCode.W);
-        _moveDown= Input.GetKey(KeyCode.S);
-        _moveRight= Input.GetKey(KeyCode.D);
-        _moveLeft= Input.GetKey(KeyCode.A);
+        _moveDown = Input.GetKey(KeyCode.S);
+        _moveRight = Input.GetKey(KeyCode.D);
+        _moveLeft = Input.GetKey(KeyCode.A);
+        _turnRight = Input.GetKey(KeyCode.RightArrow);
+        _turnLeft = Input.GetKey(KeyCode.LeftArrow);
     }
 
     private void FixedUpdate()
@@ -42,6 +47,11 @@ public class PlayerMovementWithForce : MonoBehaviour
             Move(Vector2.right);
         else if (_moveLeft)
             Move(Vector2.left);
+
+        if (_turnRight)
+            TurnRight();
+        else if (_turnLeft)
+            TurnLeft();
     }
 
     private void Move(Vector2 direction)
@@ -50,16 +60,23 @@ public class PlayerMovementWithForce : MonoBehaviour
         
     }
 
+    private void TurnRight() => _rigidBody.transform.Rotate(Vector3.back, _rotationSpeed);
+    private void TurnLeft() => _rigidBody.transform.Rotate(Vector3.back, -_rotationSpeed);
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"You crashed in enemy plane {collision.gameObject.name}");
-        Destroy(collision.gameObject);
         if (collision.CompareTag("Enemy"))
-            Destroy(gameObject);
-        else
         {
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("EnemyBullet"))
+        {
+            Destroy(collision.gameObject);
             _health.DamagePlayer(10);
         }
+        else if (collision.CompareTag("PlayerBullet"))
+            return;
     }
 
     private void OnDestroy()
