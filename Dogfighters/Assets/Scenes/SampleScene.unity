@@ -84003,6 +84003,10 @@ PrefabInstance:
       propertyPath: _loseScreen
       value: 
       objectReference: {fileID: 1655907207}
+    - target: {fileID: 8804706296976839786, guid: ce1fd78162d70e443afb7abe91e6d2b0, type: 3}
+      propertyPath: m_LinearDrag
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8804706296976839790, guid: ce1fd78162d70e443afb7abe91e6d2b0, type: 3}
       propertyPath: healthBar
       value: 
